@@ -5,6 +5,7 @@ import camt.se331.gourmetbooker.entity.Request;
 import camt.se331.gourmetbooker.entity.Restaurant;
 import camt.se331.gourmetbooker.entity.Role;
 import camt.se331.gourmetbooker.entity.User;
+import camt.se331.gourmetbooker.repository.RequestRepository;
 import camt.se331.gourmetbooker.repository.RoleRepository;
 import camt.se331.gourmetbooker.repository.UserRepository;
 import org.springframework.beans.factory.InitializingBean;
@@ -27,7 +28,8 @@ public class DatabaseInitializationBean implements InitializingBean {
     @Autowired
     UserRepository userRepository;
     @Autowired
-    RequestDao requestDao;
+    RequestRepository requestRepository;
+
     @Override
     public void afterPropertiesSet() throws Exception {
 
@@ -55,15 +57,20 @@ public class DatabaseInitializationBean implements InitializingBean {
         user.setTel("080987654");
         user.setPassword("123456");
         user.setShop(new Restaurant("Test", 10, false, user));
-        Request test=new Request(user);
-        user.setRequest(test);
-        requestDao.approve(test);
+
+
+
+
+
+
+
 
         Set<Role> roles2 = new HashSet<>();
         roles2.add(userRole);
         user.setRoles(roles2);
         userRepository.save(admin);
         userRepository.save(user);
+
         System.out.print(user.toString());
         admin.setRoles(roles);
         user.setRoles(roles2);
